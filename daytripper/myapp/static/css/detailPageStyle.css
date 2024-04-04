@@ -1,0 +1,91 @@
+  /* adjust bookmark button */
+  .btn-primary {
+    color: black;
+    background-color: #cdc9ae;
+    border-color: #cdc9ae;
+    border-radius: 10px;
+}
+
+.button_header {
+    margin-top: 40px;
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* adjust right & left contents' margin */
+.padding-right-custom {
+    padding-right: 30px; /* or any value you prefer */
+}
+
+.padding-left-custom {
+    padding-left: 30px; /* or any value you prefer */
+}
+
+/* adjust reviews part */
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: #cdc9ae;
+    border: #ddd;
+}
+
+.panel-default {
+    border: #cdc9ae 3px solid;
+}
+
+/* adjust slides part */
+.carousel-inner, .carousel-inner .item {
+    height: 600px;
+}
+
+.carousel-inner .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin: auto;
+}
+
+/* adjust title part */
+.panel-body_title {
+    margin-top: 30px;
+    height: 150px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 30px;
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* adjust scroll part */
+.scrollable-panel {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* font */
+.details_name {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.panel-title {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 26px;
+}
+
+.review {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.sub_section {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}

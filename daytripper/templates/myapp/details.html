@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load my_custom_tags %}
+{% load static %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/detailPageStyle.css' %}">
+{% endblock %}
+
+
+{% block body_block %}
+
+<!--header name & Bookmark Button-->
+<div class="container clearfix">
+    <div class="col-sm-offset-2 col-sm-8 details_name">
+        <h1 style="font-size: 80px; text-align: center"> {{ place_details.name }} </h1>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="col-sm-2 ">
+        <!-- Bookmark submission button -->
+        <form id="bookmark-form" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="place_id" value="{{ place_details.place_id }}">
+            <button class="btn-primary button_header" type="submit" name="bookmark" style="font-size: 25px"><i
+                    class="fa fa-bookmark" aria-hidden="true"></i> Add Favorites
+            </button>
+        </form>
+    </div>
+    {% else %}
+    <div class="col-sm-2 ">
+        <!-- Bookmark submission button -->
+            {% csrf_token %}
+            <button id ="bookmarkDummy" class="btn-primary button_header" name="bookmark" style="font-size: 25px" ><i
+                    class="fa fa-bookmark" aria-hidden="true"></i> Add Favorites
+            </button>
+    </div>
+    {% endif %}
+</div>
+<!--Content panel  内容面板-->
+<div class="container clearfix">
+    <!--left content 左边-->
+    <div class="col-sm-6 padding-right-custom">
+        <!--slide part-->
+        <div id="carousel-example-captions" class="carousel slide" data-ride="carousel" style="margin-top: 40px">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for photo in place_details.photos %}
+                    <li data-target="#carousel-example-captions" data-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %}class="active"{% endif %}></li>
+                {% endfor %}
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {% for photo in place_details.photos %}
+                    <div class="item{% if forloop.first %} active{% endif %}" style="text-align: center;">
+                        <!-- Adjust the inline style for the image as needed -->
+                        <img src="{{ photo.photo_reference | make_photo_url }}" alt="Slide {{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-captions" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-captions" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!--map part-->
+        <div class="panel panel-default" style="margin-top: 20px">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Map
+                </h2>
+            </div>
+            <div class="panel-body" style="height:600px ">
+                <!--map-->
+                <div id="map-container" style="height: 570px; " onclick=""></div>
+            </div>
+        </div>
+    </div>
+
+    <!--right content 右边-->
+    <div class="col-sm-6 padding-left-custom">
+        <!--address & phone number & description part-->
+        <div class="panel panel-default scrollable-panel" style="margin-top: 40px">
+            <div class="panel-heading">
+                <h2 class="panel-title" style="text-align: center;">{{ place_details.name }}
+                    Overview</h2>
+            </div>
+            <div class="panel-body_title">
+                <p>Address: {{ place_details.formatted_address }}</p>
+                <p>Phone Number: {{ place_details.international_phone_number }}</p>
+                <p>Short Description: {{ description }}</p>
+            </div>
+        </div>
+        <!-- Google Users' Reviews part-->
+        <div class="panel panel-default" style="margin-top: 20px; height: 350px">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-commenting" aria-hidden="true"></i>
+                    Google Reviews<span
+                            style="float: right">User
+                    Rating: {{ place_details.rating }} / 5</span></h2>
+            </div>
+            <div class="panel-body scrollable-panel">
+                <!--Google Users' Reviews -->
+                {% for review in place_details.reviews %}
+                    <div class="review">
+                        <p><i class="fa fa-user" aria-hidden="true"></i> {{ review.author_name }}: {{ review.text }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- DayTripper Users' Reviews part-->
+        <div class="panel panel-default" style="margin-top: 20px; height: 350px">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-commenting" aria-hidden="true"></i>
+                    Daytripper Reviews<span style="float: right"></span></h2>
+            </div>
+            <div class="panel-body scrollable-panel">
+                <!-- Display DayTripper existing reviews -->
+                {% for review in reviews %}
+                    <div class="review">
+                        <strong><i class="fa fa-user" aria-hidden="true"></i> {{ review.user.username }}:</strong>
+                        <div>{{ review.text }}</div>
+                        <div><i class="fa fa-calendar" aria-hidden="true"></i> Posted
+                            on: {{ review.created_at }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Review submission form -->
+        <div class="sub_section">
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'myapp:selected_place' placeId=place_details.place_id %}">
+                {% csrf_token %}
+                <textarea
+                        style="width: 640px; height: 200px;border-radius: 15px; font-size: 20px; border: 5px solid #cdc9ae"
+                        name="text" placeholder="    Leave your experience for more people to see!"></textarea>
+                <input type="hidden" name="place_id" value="{{ place_details.place_id }}">
+                <div>
+                    <button class="btn-primary" type="submit" name="review"
+                            style="font-size: 25px; width: 640px; margin-top: 20px">Submit Review
+                    </button>
+                </div>
+            </form>
+            {% else %}
+            <button class="btn-primary"  name="review"
+                            style="font-size: 25px; width: 640px; margin-top: 20px" disabled>Please login to write a review
+                    </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<!--js part-->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.js' %}"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk00JlTOvjLidEHIwRue1ER9tD-4rjVvk&callback=initMap&language=en">
+</script>
+<script type="text/javascript">
+    /*map function*/
+    function initMap() {
+        var placeLat = {{ lat }};
+        var placeLng = {{ lng }};
+        var centerOfMap = new google.maps.LatLng(placeLat, placeLng);
+        var mapOptions = {
+            zoom: 15,
+            center: centerOfMap,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var mapElement = document.getElementById('map-container');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        // Add a marker for the selected place
+        var marker = new google.maps.Marker({
+            position: centerOfMap,
+            map: map,
+            title: '{{ place_details.name|escapejs }}'
+        });
+    }
+
+    window.initMap = initMap;
+    /*bookmark function*/
+    $('#bookmark-form').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'myapp:selected_place' placeId=place_details.place_id %}',
+            data: $(this).serialize() + '&bookmark=', // Ensure CSRF token is included
+            success: function (response) {
+                alert(response.message); // Show success message
+                // Optional: Update UI or redirect
+            },
+            error: function () {
+                alert('There was an error. Please try again.');
+            }
+        });
+    });
+    document.getElementById('bookmarkDummy').addEventListener('click', function() {
+        alert('Please login before using the bookmark function'); 
+    });
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk00JlTOvjLidEHIwRue1ER9tD-4rjVvk&callback=initMap&language=en">
+</script>
+{% endblock %}

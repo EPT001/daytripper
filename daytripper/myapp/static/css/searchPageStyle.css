@@ -1,0 +1,53 @@
+.row .welcome-text p {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.row .welcome-text h1 {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 80px;
+}
+
+.findulike {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 60px;
+}
+
+.findulove {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+}
+
+.form-group  {
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.btn-default {
+    color: black;
+    background-color: white;
+    border-color: #cdc9ae;
+    border-radius: 10px;
+    width: 150px;
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+ /* adjust data table */
+ table {
+    text-align: center;
+    font-size: 20px;
+}

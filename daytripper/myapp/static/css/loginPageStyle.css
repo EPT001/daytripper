@@ -1,0 +1,66 @@
+body,
+html {
+    font-family: "Poor Story";
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #FFFDD0 !important
+}
+.user_card {
+    width: 450px; /* Increase the width of the container */
+    margin: auto; /* Center horizontally */
+    margin-top: 15vh; /* Adjust the top margin for vertical centering */
+    background: #cdc9ae;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px; /* Increase padding */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px; /* Increase border radius */
+}
+
+.form_container {
+    margin-top: 30px; /* Increase top margin between form elements */
+}
+
+#form-title {
+    color: #fff;
+    text-align: center; /* Center the text */
+    font-size: 40px; /* Increase font size */
+    margin-bottom: 20px; /* Increase margin between title and form */
+}
+
+.login_btn {
+    width: 100%;
+    background: #33ccff !important;
+    color: white !important;
+    border: none;
+}
+.login_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+.login_container {
+    padding: 0 2rem;
+}
+.input-group-addon {
+    background: #f7ba5b !important;
+    color: white !important;
+    border: 0 !important;
+    border-radius: 4px;
+}
+.form-control:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+
+#messages {
+    background-color: grey;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+}
+.input-group {
+    margin-bottom: 20px; /* Increase margin between input groups */
+}

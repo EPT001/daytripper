@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load my_custom_tags %}
+{% load static %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/bookmarkPage.css' %}">
+
+{% endblock %}
+
+{% block body_block %}
+<!-- favorites data part -->
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-bookmark" aria-hidden="true"></i> Saved
+            Favorites
+        </div>
+        <div class="panel-body">
+            <!-- data table -->
+            <table class="table table-bordered table table-hover">
+                <thead>
+                <tr class="table_title">
+                    <th style="text-align: center">Location Name</th>
+                    <th style="text-align: center">Detailed Page</th>
+                    <th style="text-align: center">Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bookmark in bookmarks %}
+                    <tr>
+                        <td>{{ bookmark.place_name }}</td>
+                        <td><a href="{% url 'myapp:selected_place' bookmark.place_id %}">View Details</a></td>
+                        <td>
+                            <form method="post" action="{% url 'myapp:delete_bookmark' bookmark.id %}"
+                                  style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="no_fav" colspan="3">No favorites saved yet.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.js' %}"></script>
+<script type="text/javascript">
+</script>
+
+{% endblock %}
+
+
+
+
+

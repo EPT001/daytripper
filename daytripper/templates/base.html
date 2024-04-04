@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Finger+Paint&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Finger+Paint&family=Poor+Story&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/navbarStyle.css' %}">
+    {% block head_block %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--daytripper ico need to adjust location-->
+                <img src="{% static 'img/suitcase.png' %}"
+                     style="height: 20px;margin-top: 15px;float: left;margin-right: 5px"
+                     alt="">
+                <a class="navbar-brand daytripper" style="font-size: 20px" href="/myapp/current_location/">
+                    DayTripper</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                <ul class="nav navbar-nav">
+                    <li class="active daytripper" style="font-size: 20px"><a href="/myapp/current_location/"><i
+                            class="fa fa-home" aria-hidden="true"></i>
+                        Home</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+              
+                    <li class="dropdown daytripper" style="font-size: 20px">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>  
+                           {% if user.is_authenticated %}
+                           {{request.user}}
+                           {% else %}Account {% endif %}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {% if user.is_authenticated %}
+                            <li style="font-size: 20px"><a href="{% url 'myapp:user_bookmarks' %}">Favorites</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li style="font-size: 20px"><a href="{% url 'myapp:logout' %}">LogOut</a></li>
+                            
+                            {% else %}
+                            <li style="font-size: 20px"><a href="{% url 'myapp:loginPage' %}">Login</a></li>
+                            <li style="font-size: 20px"><a href="{% url 'myapp:signupPage' %}">Signup</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    {% block body_block %}
+    {% endblock %}
+</body>
+</html

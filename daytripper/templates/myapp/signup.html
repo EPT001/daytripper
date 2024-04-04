@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_block %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/loginPageStyle.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="user_card">
+                    <h3 id="form-title">REGISTER ACCOUNT</h3>
+                    <div class="form_container">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                {{ form.username }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-envelope-square"></i></span>
+                                {{ form.email }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                {{ form.password2 }}
+                            </div>
+                            <div class="login_container">
+                                <input class="btn login_btn" type="submit" value="Register Account">
+                            </div>
+                        </form>
+                    </div>
+                    {{ form.errors }}
+                    <div class="text-center">
+                        <p>Already have an account? <a href="{% url 'myapp:loginPage' %}">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/signupPageScript.js' %}"></script>
+{% endblock %}

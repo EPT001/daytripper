@@ -1,0 +1,22 @@
+table {
+    text-align: center;
+    font-size: 20px;
+}
+.table_title{
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+}
+.panel-heading{
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+}
+.no_fav{
+    font-family: "Poor Story", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+}
